@@ -1,6 +1,6 @@
 #include "usart.h"
 
-extern uint8_t buf_rx[16], buf_tx[16];
+extern uint8_t buf_rx[8], buf_tx[8];
 
 
 
@@ -23,7 +23,7 @@ void usart_init(void)
 	GPIO_PinAFConfig(USART_BUS, GPIO_PinSource8, GPIO_AF_USART1);
 	GPIO_PinAFConfig(USART_BUS, GPIO_PinSource9, GPIO_AF_USART1);
 	
-	usart1.USART_BaudRate = 9600;//
+	usart1.USART_BaudRate = 115200;//
 	usart1.USART_WordLength = USART_WordLength_8b;//
 	usart1.USART_StopBits = USART_StopBits_1;
 	usart1.USART_Parity = USART_Parity_No;//бит четности
