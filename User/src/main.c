@@ -27,29 +27,62 @@ void DMA2_Stream0_IRQHandler(void)
 		DMA_ClearITPendingBit(DMA2_Stream0, DMA_IT_TCIF0);//очищаем флаг приема
 		CS_OFF();//выключаем чип селект
 		Spi_work = 0;//SPI не работает выключаем флаг
-		int32_t temp2;
+		int32_t temp2 = 0;
 		buf_tx[0] = 0xAA;
 		buf_tx[1] = 0xBB;
 		
 		temp = (((uint16_t)spi_in[2])<<8)|((uint16_t)spi_in[1]);
-		temp2 = temp*256;
-		temp2 = temp2/14;
-		temp = temp2;
-		buf_tx[2] = (uint8_t)(temp>>8);//X
+/*		if(temp == 0x007F)
+			temp = 0x0000;
+		else 
+		{			
+			temp2 = 0x00FF - temp;
+//		temp2 = temp2/14;
+			temp = temp - temp2;
+		}
+		if(temp >= 0x8000)
+		{
+			temp -= 0x8000;
+		}
+		else
+			temp += 0x8000;
+*/		buf_tx[2] = (uint8_t)(temp>>8);//X
 		buf_tx[3] = (uint8_t)temp;
 		
 		temp = (((uint16_t)spi_in[4])<<8)|((uint16_t)spi_in[3]);
-		temp2 = temp*256;
-		temp2 = temp2/14;
-		temp = temp2;
-		buf_tx[4] = (uint8_t)(temp>>8);//X
+/*		if(temp == 0x007F)
+			temp = 0x0000;
+		else 
+		{			
+			temp2 = 0x00FF - temp;
+//		temp2 = temp2/14;
+			temp = temp - temp2;
+		}
+		if(temp >= 0x8000)
+		{
+			temp -= 0x8000;
+		}
+		else
+			temp += 0x8000;
+*/		buf_tx[4] = (uint8_t)(temp>>8);//Y
 		buf_tx[5] = (uint8_t)temp;
 		
 		temp = (((uint16_t)spi_in[6])<<8)|((uint16_t)spi_in[5]);
-		temp2 = temp*256;
-		temp2 = temp2/14;
-		temp = temp2;
-		buf_tx[6] = (uint8_t)(temp>>8);//X
+	/*	if(temp == 0x007F)
+			temp = 0x0000;
+		else 
+		{			
+			temp2 = 0x00FF - temp;
+//		temp2 = temp2/14;
+			temp = temp - temp2;
+		}
+		if(temp >= 0x8000)
+		{
+			temp -= 0x8000;
+		}
+		else
+			temp += 0x8000;
+*/		buf_tx[6] = (uint8_t)(temp>>8);//X
 		buf_tx[7] = (uint8_t)temp;
 	
 //		flag_spi = 1;
